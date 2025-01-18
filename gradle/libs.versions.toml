@@ -38,6 +38,15 @@ org-jetbrains-kotlin-jvm = "2.0.0"
 secretsPlugin = "2.0.1"
 androidTools = "31.8.0"
 
+
+# Project versions
+projectApplicationId = "com.evirgenoguz.runique"
+projectVersionName = "1.0"
+projectMinSdkVersion = "25"
+projectTargetSdkVersion = "35"
+projectCompileSdkVersion = "35"
+projectVersionCode = "1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -117,3 +126,4 @@ room = { id = "androidx.room", version.ref = "room" }
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsPlugin"}
 
+runique-android-application = { id = "runique.android.application", version = "unspecified"}
