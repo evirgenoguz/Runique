@@ -4,14 +4,11 @@ import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.BuildType
 import com.android.build.api.dsl.CommonExtension
 import com.android.build.api.dsl.LibraryExtension
-import com.android.build.gradle.ProguardFiles.getDefaultProguardFile
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-import org.apache.tools.ant.property.LocalProperties
 import org.gradle.api.Project
-import org.gradle.api.provider.ProviderFactory
 import org.gradle.kotlin.dsl.configure
 
-internal fun Project.configureBuildType(
+internal fun Project.configureBuildTypes(
     commonExtension: CommonExtension<*, *, *, *, *, *>,
     extensionType: ExtensionType,
 ) {

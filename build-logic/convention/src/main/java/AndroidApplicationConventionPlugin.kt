@@ -1,6 +1,6 @@
 import com.android.build.api.dsl.ApplicationExtension
 import com.evirgenoguz.convention.ExtensionType
-import com.evirgenoguz.convention.configureBuildType
+import com.evirgenoguz.convention.configureBuildTypes
 import com.evirgenoguz.convention.configureKotlinAndroid
 import com.evirgenoguz.convention.libs
 import org.gradle.api.Plugin
@@ -26,7 +26,7 @@ class AndroidApplicationConventionPlugin: Plugin<Project> {
 
                 configureKotlinAndroid(this)
 
-                configureBuildType(
+                configureBuildTypes(
                     commonExtension = this,
                     extensionType = ExtensionType.APPLICATION
                 )
