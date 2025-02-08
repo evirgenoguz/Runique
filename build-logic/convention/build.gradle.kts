@@ -39,5 +39,10 @@ gradlePlugin {
             implementationClass = "AndroidFeatureUiConventionPlugin"
         }
 
+        register("androidRoom") {
+            id = "runique.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
+        }
+
     }
 }
