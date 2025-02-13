@@ -4,13 +4,36 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import com.evirgenoguz.auth.domain.UserDataValidator
+import com.evirgenoguz.core.presentation.ui.textAsFlow
+import kotlinx.coroutines.flow.onEach
 
-class RegisterViewModel : ViewModel() {
+class RegisterViewModel(
+    private val userDataValidator: UserDataValidator
+) : ViewModel() {
 
     var state by mutableStateOf(RegisterState())
         private set
 
-    fun onAction(action: RegisterAction) {
+    init {
+        state.email.textAsFlow().onEach { email ->
+            state = state.copy(
+                isEmailValid = userDataValidator.isValidEmail(email.toString())
+            )
+        }
 
+        state.password.textAsFlow().onEach { password ->
+            state = state.copy(
+                passwordValidationState = userDataValidator.validatePassword(password.toString())
+            )
+        }
+    }
+
+    fun onAction(action: RegisterAction) {
+        when (action) {
+            RegisterAction.OnLoginClick -> TODO()
+            RegisterAction.OnRegisterClick -> TODO()
+            RegisterAction.OnTogglePasswordVisibilityClick -> TODO()
+        }
     }
 }
