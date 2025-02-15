@@ -43,6 +43,9 @@ dependencies {
     //Coil
     implementation(libs.coil.compose)
 
+    //Koin
+    implementation(libs.koin.android)
+
     //Crypto
     implementation(libs.androidx.security.crypto.ktx)
 

@@ -99,7 +99,7 @@ private fun RegisterScreen(
             }
             Text(
                 modifier = Modifier.clickable {
-                    onAction(RegisterAction.OnRegisterClick)
+                    onAction(RegisterAction.OnLoginClick)
                 },
                 text = annotatedString,
             )
