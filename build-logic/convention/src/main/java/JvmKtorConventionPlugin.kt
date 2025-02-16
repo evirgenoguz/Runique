@@ -1,4 +1,3 @@
-import com.evirgenoguz.convention.configureKotlinJvm
 import com.evirgenoguz.convention.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project

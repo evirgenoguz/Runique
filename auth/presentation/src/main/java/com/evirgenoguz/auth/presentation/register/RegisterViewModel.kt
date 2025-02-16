@@ -84,7 +84,7 @@ class RegisterViewModel(
                 }
 
                 is Result.Success -> {
-
+                    eventChannel.send(RegisterEvent.RegistrationSuccess)
                 }
             }
         }
