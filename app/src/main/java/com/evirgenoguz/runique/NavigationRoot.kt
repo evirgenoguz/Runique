@@ -13,11 +13,12 @@ import com.evirgenoguz.auth.presentation.register.RegisterScreenRoot
 
 @Composable
 fun NavigationRoot(
-    navController: NavHostController
+    navController: NavHostController,
+    isLoggedIn: Boolean
 ) {
     NavHost(
         navController = navController,
-        startDestination = "auth"
+        startDestination = if (isLoggedIn) "run" else "auth"
     ) {
         authGraph(navController)
         runGraph(navController)
@@ -76,9 +77,6 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                 }
             )
         }
-        composable("run") {
-            Text("Run")
-        }
     }
 }
 
@@ -88,7 +86,7 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            Text("Run")
+            Text("Run Overview")
         }
     }
 }
