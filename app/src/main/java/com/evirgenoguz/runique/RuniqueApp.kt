@@ -4,6 +4,7 @@ import android.app.Application
 import com.evirgenoguz.auth.data.di.authDataModule
 import com.evirgenoguz.auth.presentation.di.authViewModelModule
 import com.evirgenoguz.core.data.di.coreDataModule
+import com.evirgenoguz.run.presentation.run_overview.di.runViewModelModule
 import com.evirgenoguz.runique.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -25,6 +26,7 @@ class RuniqueApp : Application() {
                 authDataModule,
                 authViewModelModule,
                 coreDataModule,
+                runViewModelModule,
             )
         }
     }
