@@ -13,5 +13,7 @@ data class ActiveRunState(
     val isRunFinished: Boolean = false,
     val isSavingRun: Boolean = false,
     val distanceInMeters: Double = 0.0,
-    val isRunning: Boolean = false
+    val isRunning: Boolean = false,
+    val showLocationRationale: Boolean = false,
+    val showNotificationRationale: Boolean = false
 )
