@@ -42,7 +42,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ActiveRunScreenRoot(
     viewModel: ActiveRunViewModel = koinViewModel()
-
 ) {
     ActiveRunScreen(
         state = viewModel.state,
