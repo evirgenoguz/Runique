@@ -55,13 +55,13 @@ fun TrackerMap(
     )
 
     val markerPositionLong by animateFloatAsState(
-        targetValue = currentLocation?.lat?.toFloat() ?: 0f,
+        targetValue = currentLocation?.long?.toFloat() ?: 0f,
         animationSpec = tween(durationMillis = 500),
         label = ""
     )
 
     val markerPosition = remember(markerPositionLat, markerPositionLong) {
-        LatLng(markerPositionLat.toDouble(), markerPositionLat.toDouble())
+        LatLng(markerPositionLat.toDouble(), markerPositionLong.toDouble())
     }
 
     LaunchedEffect(markerPosition, isRunFinished) {
@@ -89,6 +89,9 @@ fun TrackerMap(
             zoomControlsEnabled = false
         )
     ) {
+
+        RuniquePolyLines(locations = locations)
+
         if (!isRunFinished && currentLocation != null) {
             MarkerComposable(
                 currentLocation,
