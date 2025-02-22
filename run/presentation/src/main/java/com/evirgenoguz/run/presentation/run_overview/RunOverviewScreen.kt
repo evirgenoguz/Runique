@@ -27,10 +27,17 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun RunOverviewScreenRoot(
-    viewModel: RunOverviewViewModel = koinViewModel()
+    viewModel: RunOverviewViewModel = koinViewModel(),
+    onStartRunClick: () -> Unit,
 ) {
     RunOverViewScreen(
-        onAction = viewModel::onAction
+        onAction = { action ->
+            when (action) {
+                RunOverviewAction.OnStartClick -> onStartRunClick()
+                else -> Unit
+            }
+            viewModel.onAction(action)
+        }
     )
 }
 
@@ -82,7 +89,7 @@ fun RunOverViewScreen(
             )
         }
     ) { paddingValues ->
-        
+
     }
 }
 
