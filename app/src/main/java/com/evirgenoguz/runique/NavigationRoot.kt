@@ -94,7 +94,9 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
             )
         }
         composable("active_run") {
-            ActiveRunScreenRoot()
+            ActiveRunScreenRoot(
+                onBackClick = { navController.navigateUp() }
+            )
         }
     }
 }
