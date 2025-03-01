@@ -35,6 +35,7 @@ import com.evirgenoguz.core.presentation.designsystem.components.RuniqueToolbar
 import com.evirgenoguz.run.presentation.R
 import com.evirgenoguz.run.presentation.active_run.components.RunDataCard
 import com.evirgenoguz.run.presentation.active_run.maps.TrackerMap
+import com.evirgenoguz.run.presentation.active_run.service.ActiveRunService
 import com.evirgenoguz.run.presentation.util.hasLocationPermission
 import com.evirgenoguz.run.presentation.util.hasNotificationPermission
 import com.evirgenoguz.run.presentation.util.shouldShowLocationPermissionRationale
@@ -44,10 +45,12 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ActiveRunScreenRoot(
     viewModel: ActiveRunViewModel = koinViewModel(),
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onBackClick: () -> Unit
 ) {
     ActiveRunScreen(
         state = viewModel.state,
+        onServiceToggle = onServiceToggle,
         onAction = { action ->
             when (action) {
                 ActiveRunAction.OnBackClick -> onBackClick()
@@ -61,6 +64,7 @@ fun ActiveRunScreenRoot(
 @Composable
 private fun ActiveRunScreen(
     state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit
 ) {
     val context = LocalContext.current
@@ -114,6 +118,18 @@ private fun ActiveRunScreen(
 
         if (!showLocationRationale && !showNotificationRationale) {
             permissionLauncher.requestRuniquePermissions(context)
+        }
+    }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if (state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if (context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
         }
     }
 
@@ -255,6 +271,7 @@ private fun ActiveRunScreenPreview() {
     RuniqueTheme {
         ActiveRunScreen(
             state = ActiveRunState(),
+            onServiceToggle = {},
             onAction = {}
         )
     }
