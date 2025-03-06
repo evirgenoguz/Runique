@@ -1,4 +1,4 @@
-package com.evirgenoguz.run.presentation.run_overview
+package com.evirgenoguz.run.presentation.run_overview.model
 
 data class RunUi(
     val id: String,

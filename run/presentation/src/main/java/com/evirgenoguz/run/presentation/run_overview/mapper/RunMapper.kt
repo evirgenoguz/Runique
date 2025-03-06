@@ -6,7 +6,7 @@ import com.evirgenoguz.core.presentation.ui.toFormattedKm
 import com.evirgenoguz.core.presentation.ui.toFormattedKmh
 import com.evirgenoguz.core.presentation.ui.toFormattedMeters
 import com.evirgenoguz.core.presentation.ui.toFormattedPace
-import com.evirgenoguz.run.presentation.run_overview.RunUi
+import com.evirgenoguz.run.presentation.run_overview.model.RunUi
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 
