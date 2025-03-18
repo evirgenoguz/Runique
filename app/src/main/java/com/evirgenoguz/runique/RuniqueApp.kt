@@ -4,6 +4,7 @@ import android.app.Application
 import com.evirgenoguz.auth.data.di.authDataModule
 import com.evirgenoguz.auth.presentation.di.authViewModelModule
 import com.evirgenoguz.core.data.di.coreDataModule
+import com.evirgenoguz.core.database.di.databaseModule
 import com.evirgenoguz.run.location.di.locationModule
 import com.evirgenoguz.run.presentation.di.runPresentationModule
 import com.evirgenoguz.runique.di.appModule
@@ -33,6 +34,7 @@ class RuniqueApp : Application() {
                 coreDataModule,
                 runPresentationModule,
                 locationModule,
+                databaseModule
             )
         }
     }
