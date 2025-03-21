@@ -127,6 +127,13 @@ class RunningTracker(
     fun stopObservingLocation() {
         isObservingLocation.value = false
     }
+
+    fun finishRun() {
+        stopObservingLocation()
+        setIsTracking(false)
+        _elapsedTime.value = Duration.ZERO
+        _runData.value = RunData()
+    }
 }
 
 private fun <T> List<List<T>>.replaceLast(replaceWith: List<T>): List<List<T>> {
