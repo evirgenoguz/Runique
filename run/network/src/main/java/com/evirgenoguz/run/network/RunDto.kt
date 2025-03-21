@@ -10,8 +10,8 @@ data class RunDto(
     val distanceMeters: Int,
     val lat: Double,
     val long: Double,
-    val avgSpeedKmH: Double,
-    val maxSpeedKmH: Double,
+    val avgSpeedKmh: Double,
+    val maxSpeedKmh: Double,
     val totalElevationMeters: Int,
     val mapPictureUrl: String?
 )

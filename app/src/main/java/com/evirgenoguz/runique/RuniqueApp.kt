@@ -6,6 +6,7 @@ import com.evirgenoguz.auth.presentation.di.authViewModelModule
 import com.evirgenoguz.core.data.di.coreDataModule
 import com.evirgenoguz.core.database.di.databaseModule
 import com.evirgenoguz.run.location.di.locationModule
+import com.evirgenoguz.run.network.di.networkModule
 import com.evirgenoguz.run.presentation.di.runPresentationModule
 import com.evirgenoguz.runique.di.appModule
 import kotlinx.coroutines.CoroutineScope
@@ -34,7 +35,8 @@ class RuniqueApp : Application() {
                 coreDataModule,
                 runPresentationModule,
                 locationModule,
-                databaseModule
+                databaseModule,
+                networkModule
             )
         }
     }

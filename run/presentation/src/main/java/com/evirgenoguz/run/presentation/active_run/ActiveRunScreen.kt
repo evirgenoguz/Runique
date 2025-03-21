@@ -6,6 +6,7 @@ import android.Manifest
 import android.content.Context
 import android.graphics.Bitmap
 import android.os.Build
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -33,6 +34,7 @@ import com.evirgenoguz.core.presentation.designsystem.components.RuniqueFloating
 import com.evirgenoguz.core.presentation.designsystem.components.RuniqueOutlinedActionButton
 import com.evirgenoguz.core.presentation.designsystem.components.RuniqueScaffold
 import com.evirgenoguz.core.presentation.designsystem.components.RuniqueToolbar
+import com.evirgenoguz.core.presentation.ui.ObserveAsEvent
 import com.evirgenoguz.run.presentation.R
 import com.evirgenoguz.run.presentation.active_run.components.RunDataCard
 import com.evirgenoguz.run.presentation.active_run.maps.TrackerMap
@@ -48,14 +50,33 @@ import java.io.ByteArrayOutputStream
 fun ActiveRunScreenRoot(
     viewModel: ActiveRunViewModel = koinViewModel(),
     onServiceToggle: (isServiceRunning: Boolean) -> Unit,
+    onFinish: () -> Unit,
     onBackClick: () -> Unit
 ) {
+
+    val context = LocalContext.current
+
+    ObserveAsEvent(flow = viewModel.events) { event ->
+        when (event) {
+            is ActiveRunEvent.Error -> {
+                Toast.makeText(context, event.error.asString(context), Toast.LENGTH_LONG).show()
+            }
+
+            ActiveRunEvent.RunSaved -> onFinish()
+
+        }
+    }
+
     ActiveRunScreen(
         state = viewModel.state,
         onServiceToggle = onServiceToggle,
         onAction = { action ->
             when (action) {
-                ActiveRunAction.OnBackClick -> onBackClick()
+                ActiveRunAction.OnBackClick -> {
+                    if (!viewModel.state.hasStartedRunning) {
+                        onBackClick()
+                    }
+                }
                 else -> Unit
             }
             viewModel.onAction(action)

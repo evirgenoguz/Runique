@@ -14,7 +14,7 @@ fun RunDto.toRun(): Run {
             .atZone(ZoneId.of("UTC")),
         distanceMeters = distanceMeters,
         location = Location(lat, long),
-        maxSpeedKmH = maxSpeedKmH,
+        maxSpeedKmH = maxSpeedKmh,
         totalElevationMeters = totalElevationMeters,
         mapPictureUrl = mapPictureUrl
     )
@@ -24,13 +24,13 @@ fun Run.toRunDto(): RunDto {
     return RunDto(
         id = id ?: "",
         durationMillis = duration.inWholeMilliseconds,
-        maxSpeedKmH = maxSpeedKmH,
+        maxSpeedKmh = maxSpeedKmH,
         dateTimeUtc = dateTimeUtc.toInstant().toString(),
         lat = location.lat,
         long = location.long,
         distanceMeters = distanceMeters,
         totalElevationMeters = totalElevationMeters,
-        avgSpeedKmH = avgSpeedKmH,
+        avgSpeedKmh = avgSpeedKmH,
         mapPictureUrl = mapPictureUrl
     )
 }
@@ -42,8 +42,8 @@ fun Run.toCreateRunRequest(): CreateRunRequest {
         epochMillis = dateTimeUtc.toEpochSecond() * 1000L,
         lat = location.lat,
         long = location.long,
-        avgSpeedKmH = avgSpeedKmH,
-        maxSpeedKmH = maxSpeedKmH,
+        avgSpeedKmh = avgSpeedKmH,
+        maxSpeedKmh = maxSpeedKmH,
         totalElevationMeters = totalElevationMeters,
         id = id.orEmpty()
     )
