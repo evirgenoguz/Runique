@@ -8,6 +8,7 @@ import com.evirgenoguz.core.domain.run.RemoteRunDataSource
 import com.evirgenoguz.core.domain.run.Run
 import com.evirgenoguz.core.domain.run.RunId
 import com.evirgenoguz.core.domain.run.RunRepository
+import com.evirgenoguz.core.domain.run.SyncRunScheduler
 import com.evirgenoguz.core.domain.util.DataError
 import com.evirgenoguz.core.domain.util.EmptyResult
 import com.evirgenoguz.core.domain.util.Result
@@ -24,7 +25,8 @@ class OfflineFirstRunRepository(
     private val remoteRunDataSource: RemoteRunDataSource,
     private val applicationScope: CoroutineScope,
     private val runPendingSyncDao: RunPendingSyncDao,
-    private val sessionStorage: SessionStorage
+    private val sessionStorage: SessionStorage,
+    private val syncRunScheduler: SyncRunScheduler
 ) : RunRepository {
     override fun getRuns(): Flow<List<Run>> {
         return localRunDataSource.getRuns()
@@ -65,6 +67,13 @@ class OfflineFirstRunRepository(
             }
 
             is Result.Error -> {
+                applicationScope.launch {
+                    syncRunScheduler.scheduleSync(
+                        type = SyncRunScheduler.SyncType.CreateRun(
+                            run = runWithId, mapPictureBytes = mapPicture
+                        )
+                    )
+                }.join()
                 Result.Success(Unit)
             }
         }
@@ -85,6 +94,14 @@ class OfflineFirstRunRepository(
         val remoteResult = applicationScope.async {
             remoteRunDataSource.deleteRun(id)
         }.await()
+
+        if (remoteResult is Result.Error) {
+            applicationScope.launch {
+                syncRunScheduler.scheduleSync(
+                    type = SyncRunScheduler.SyncType.DeleteRuns(runId = id)
+                )
+            }.join()
+        }
 
     }
 
