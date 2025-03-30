@@ -141,7 +141,7 @@ class SyncRunWorkerScheduler(
         workManager.enqueue(workRequest).await()
     }
 
-    override suspend fun cancelAllSyncs(type: SyncRunScheduler.SyncType) {
+    override suspend fun cancelAllSyncs() {
         WorkManager.getInstance(context)
             .cancelAllWork()
             .await()
