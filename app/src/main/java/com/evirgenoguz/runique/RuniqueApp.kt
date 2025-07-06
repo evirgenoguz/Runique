@@ -1,6 +1,7 @@
 package com.evirgenoguz.runique
 
 import android.app.Application
+import android.content.Context
 import com.evirgenoguz.auth.data.di.authDataModule
 import com.evirgenoguz.auth.presentation.di.authViewModelModule
 import com.evirgenoguz.core.data.di.coreDataModule
@@ -10,6 +11,7 @@ import com.evirgenoguz.run.location.di.locationModule
 import com.evirgenoguz.run.network.di.networkModule
 import com.evirgenoguz.run.presentation.di.runPresentationModule
 import com.evirgenoguz.runique.di.appModule
+import com.google.android.play.core.splitcompat.SplitCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -43,5 +45,10 @@ class RuniqueApp : Application() {
                 runDataModule,
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }
