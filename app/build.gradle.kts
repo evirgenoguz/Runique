@@ -1,6 +1,5 @@
 plugins {
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.mapsplatform.secrets.plugin)
     alias(libs.plugins.runique.android.application.compose)
     alias(libs.plugins.runique.jvm.ktor)
 }
@@ -11,6 +10,7 @@ android {
     defaultConfig {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
+    dynamicFeatures += setOf(":analytics:analytics_feature")
 
 }
 
@@ -44,7 +44,7 @@ dependencies {
     implementation(libs.coil.compose)
 
     //Koin
-    implementation(libs.koin.android)
+    implementation(libs.bundles.koin)
 
     //Crypto
     implementation(libs.androidx.security.crypto.ktx)
