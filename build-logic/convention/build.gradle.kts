@@ -59,5 +59,10 @@ gradlePlugin {
             implementationClass = "JvmKtorConventionPlugin"
         }
 
+        register("androidApplicationWearCompose") {
+            id = "runique.android.application.wear.compose"
+            implementationClass = "AndroidApplicationWearComposeConventionPlugin"
+        }
+
     }
 }
